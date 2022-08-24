@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using ShopOnline.Models.DTOs;
 using ShopOnline.Web.Services.Contracts;
 
 namespace ShopOnline.Web.Pages
@@ -7,5 +8,12 @@ namespace ShopOnline.Web.Pages
     {
         [Inject]
         public IProductService ProductService { get; set; }
+
+        public IEnumerable<ProductDTO> Products { get; set; }
+
+        protected override async Task OnInitializedAsync()
+        {
+            Products = await ProductService.GetItems();
+        }
     }
 }
